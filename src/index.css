@@ -1,0 +1,13 @@
+.meeting-container{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #f8f9fa;
+  
+}
+
+.main-section{
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}

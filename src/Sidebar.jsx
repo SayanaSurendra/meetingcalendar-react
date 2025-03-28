@@ -39,10 +39,11 @@ const Sidebar = () => {
 
 
 
-        <div className="d-flex flex-column flex-shrink-0 mt-3 mx-3 border-start border-end " style={{ "width": "350px" }}>
-            <h3 className="text-white bg-black py-5 text-center"><i className="bi bi-speedometer2 me-3"></i>DashBoard</h3>
-
-            <ul className="nav nav-pills nav-flush flex-column mb-auto bg-white">
+        <div className="d-flex flex-column flex-shrink-0 mt-3 mx-3" style={{ "width": "350px" }}>
+            <div className="text-white bg-black  text-center py-4 mb-0">
+            <h3 ><i className="bi bi-speedometer2 me-3"></i>DashBoard</h3>
+            </div>
+            <ul className="nav nav-pills nav-flush flex-column mb-auto bg-white border start">
                 {sidebarData.map((item, key) => {
                     return (<li className="nav-item" key={key}>
                         <a href={`${item.link} `} className="nav-link py-3 border-bottom" data-bs-toggle="tooltip"><i className={`${item.icon} me-3 text-dark`} ></i>
