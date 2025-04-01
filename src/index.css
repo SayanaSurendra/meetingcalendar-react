@@ -1,8 +1,13 @@
+
+
 .meeting-container{
   margin: 0;
   padding: 0;
-  height: 100vh;
+min-height: 100vh;
   background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  
   
 }
 
@@ -10,4 +15,9 @@
   display: flex;
   justify-content: flex-start;
   gap: 20px;
+  flex: 1; 
+}
+
+footer{
+  margin-top: auto;
 }

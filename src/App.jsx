@@ -2,16 +2,25 @@ import Footer from "./Footer";
 import Form from "./Form"
 import NavBar from "./NavBar"
 import Sidebar from "./Sidebar"
+import { useState } from "react";
 import "./index.css";
-function App() {
- 
 
+
+
+
+
+function App() {
+ const [activeTitle,setActiveTitle]=useState("");
+const handleRedirect=(title)=>{
+ setActiveTitle(title);
+};
   return (
     <div className="meeting-container">
-      <NavBar/>
+      <NavBar  />
       <div className="main-section">
-     <Sidebar/>
-     <Form/>
+     <Sidebar onRedirect={handleRedirect}/>
+     {activeTitle === "Schedule Meeting" && <Form/>}
+     
      </div>
      <Footer/>
     </div >

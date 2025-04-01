@@ -10,6 +10,7 @@ const navLinks = [
     
   ];
 
+ 
 
 const NavBar = () => {
     return (
@@ -25,7 +26,8 @@ const NavBar = () => {
             </li>
           ))}
         
-
+        
+       
         </ul>
             </div>  
         </nav>

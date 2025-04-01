@@ -34,7 +34,7 @@ const sidebarData = [
     }
 ];
 
-const Sidebar = () => {
+const Sidebar = ({onRedirect}) => {
     return (
 
 
@@ -46,7 +46,7 @@ const Sidebar = () => {
             <ul className="nav nav-pills nav-flush flex-column mb-auto bg-white border start">
                 {sidebarData.map((item, key) => {
                     return (<li className="nav-item" key={key}>
-                        <a href={`${item.link} `} className="nav-link py-3 border-bottom" data-bs-toggle="tooltip"><i className={`${item.icon} me-3 text-dark`} ></i>
+                        <a href={`${item.link} `} className="nav-link py-3 border-bottom"  onClick={()=> onRedirect(item.title)}><i className={`${item.icon} me-3 text-dark`} ></i>
                             <span className="nav-title text-dark">{item.title}</span></a>
                     </li>)
                 })}
