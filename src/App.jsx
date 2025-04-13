@@ -1,29 +1,39 @@
-import Footer from "./Footer";
-import Form from "./Form"
-import NavBar from "./NavBar"
-import Sidebar from "./Sidebar"
-import { useState } from "react";
+import Footer from "./components/Footer";
+
+import NavBar from "./components/NavBar"
+
 import "./index.css";
+import Home from "./navpages/Home";
+import Services from "./navpages/Services";
+import Contact from "./navpages/Contact";
+import About from "./navpages/About";
+import DashBoard from "./components/DashBoard";
 
-
+import { BrowserRouter as Router,Routes,Route } from "react-router";
+import Sidebar from "./components/Sidebar";
 
 
 
 function App() {
- const [activeTitle,setActiveTitle]=useState("");
-const handleRedirect=(title)=>{
- setActiveTitle(title);
-};
+
+ 
   return (
+    <Router>
     <div className="meeting-container">
       <NavBar  />
-      <div className="main-section">
-     <Sidebar onRedirect={handleRedirect}/>
-     {activeTitle === "Schedule Meeting" && <Form/>}
-     
-     </div>
+      <Routes>
+       <Route path='/' element={<Home/>}/>
+       <Route path='/about' element={<About/>}/>
+       <Route path='/services' element={<Services/>}/>
+       <Route path='/contact' element={<Contact/>}/>
+       <Route path='/dashboard' element={<DashBoard/>}/>
+       <Route path='/dashboard/*' element={<Sidebar/>}/>
+      </Routes>
+      
      <Footer/>
+     
     </div >
+    </Router>
   )
 }
 
