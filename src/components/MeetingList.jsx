@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MeetingList = ({ meetings }) => {
+const MeetingList = ({ meetings,onEdit }) => {
 
     return (
         <div className="container-fluid bg-white ms-3 me-5 px-4 mt-4 mb-4">
@@ -28,7 +28,7 @@ const MeetingList = ({ meetings }) => {
                                 <td>{meeting.meetingTime}</td>
                                 <td>{meeting.meetingLevel}</td>
                                 <td>
-                                    <button className="me-1 btn btn-warning" ><i className="bi bi-pencil-square"></i></button>
+                                    <button className="me-1 btn btn-warning" onClick={()=>onEdit(meeting.meetingId)} ><i className="bi bi-pencil-square"></i></button>
                                     <button className="btn btn-danger" ><i className="bi bi-trash"></i></button>
                                 </td>
                             </tr>

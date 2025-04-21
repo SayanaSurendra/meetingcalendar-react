@@ -7,9 +7,16 @@ const levelOptions = [
     { value: "Department", label: "Department" }
 ];
 
-const Form = ({register,onSubmit,errors}) => {
+const Form = ({register,onSubmit,errors,edit,meetingId}) => {
  
-  
+    const pageTitle=()=>{
+        if(meetingId){
+            return  <h3 className='py-4'><i className="bi bi-pencil-square me-3"></i>Edit Meeting</h3>
+        }else{
+            return   <h3 className='py-4'><i className="bi bi-calendar-plus me-3"></i>Schedule a New Meeting</h3>
+        }
+    }
+
  
      return (
          
@@ -17,7 +24,7 @@ const Form = ({register,onSubmit,errors}) => {
                  <div className='row'>
                      <div className='col-md-12'>
                          <form onSubmit={onSubmit}>
-                         <h3 className='py-4'><i className="bi bi-calendar-plus me-3"></i>Schedule a New Meeting</h3>
+                            {pageTitle()}
  
                              <div className="mb-3">
                                  <InputField label="Meeting Title" type="text" name="meetingTitle" placeholder="Enter title" register={register} validation={{ required: "Meeting Title is required" }} errors={errors}   />
@@ -62,7 +69,7 @@ const Form = ({register,onSubmit,errors}) => {
                                  <InputField label="Description" type="textarea" name="meetingDescription" placeholder="Enter meeting description" rows={4} register={register} validation={{ required: "Description is required" }} errors={errors} />
                              </div>
  
-                             <button type="submit" className="btn btn-primary mb-4">+ Create Meeting</button>
+                             <button type="submit" className="btn btn-primary mb-4">{edit ? "Update " : "+ Create "}Meeting</button>
                          </form>
  
  

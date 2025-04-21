@@ -17,6 +17,7 @@ const DashBoard = () => {
 
   const [meetings, setMeetings] = useState([]);
   const [activeLink, setActiveLink] = useState("");
+  const [edit,setEdit]=useState(false);
   const navigate = useNavigate();
 
   const API_ENDPOINT="http://localhost:8080/api/meetingCalendar"
@@ -47,8 +48,8 @@ const DashBoard = () => {
   };
 
 
-  const updatedMeeting = (updatedMeetings) => {
-    setMeetings(updatedMeetings);
+  const updatedMeeting = () => {
+    fetchAllMeetings();
   };
 
 
@@ -58,14 +59,21 @@ const DashBoard = () => {
   };
 
 
+
+  const onEdit=(meetingId)=>{
+    setEdit(true);
+    navigate(`/dashboard/manage-meeting/${meetingId}`);
+ }
+
+
   return (
     <div className='main-section'  >
       <Sidebar activeLink={activeLink} onNavigate={handleNavigate} />
 
 
       <Routes>
-        <Route path="schedule-meeting" element={<ScheduleMeeting  meetings={meetings} updatedMeeting={updatedMeeting} />} />
-        <Route path="manage-meeting/:meetingId" element={<ScheduleMeeting />} />
+        <Route path="schedule-meeting" element={<ScheduleMeeting  meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}/>} />
+        <Route path="manage-meeting/:meetingId" element={<ScheduleMeeting meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}/>} />
         <Route path="manage-meeting" element={<ManageMeeting />} />
         <Route path="users-permissions" element={<UserPermission />} />
         <Route path="notifications" element={<Notification />} />
