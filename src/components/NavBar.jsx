@@ -17,7 +17,7 @@ const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className='container-fluid'>
-          <i className="bi bi-calendar3 me-4 " style={{ color: 'green' ,fontSize: '2rem'}}></i>
+          <i className="bi bi-calendar3 me-4 " style={{ color: 'white' ,fontSize: '2rem'}}></i>
           <ul className=" navbar-nav me-auto">
            {navLinks.map((link) => (
             <li key={link.name} className="nav-item">
