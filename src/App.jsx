@@ -10,7 +10,7 @@ import About from "./navpages/About";
 import DashBoard from "./components/DashBoard";
 
 import { BrowserRouter as Router,Routes,Route } from "react-router";
-import Sidebar from "./components/Sidebar";
+
 
 
 
@@ -26,8 +26,8 @@ function App() {
        <Route path='/about' element={<About/>}/>
        <Route path='/services' element={<Services/>}/>
        <Route path='/contact' element={<Contact/>}/>
-       <Route path='/dashboard' element={<DashBoard/>}/>
-       <Route path='/dashboard/*' element={<Sidebar/>}/>
+       <Route path='/dashboard/*' element={<DashBoard/>}/>
+      
       </Routes>
       
      <Footer/>
