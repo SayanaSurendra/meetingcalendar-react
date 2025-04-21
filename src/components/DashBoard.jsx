@@ -7,9 +7,10 @@ import Settings from './Settings';
 import ScheduleMeeting from './ScheduleMeeting';
 import ManageMeeting from './ManageMeeting';
 import { Routes, Route } from 'react-router';
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+
 
 
 
@@ -17,18 +18,19 @@ const DashBoard = () => {
 
   const [meetings, setMeetings] = useState([]);
   const [activeLink, setActiveLink] = useState("");
-  const [edit,setEdit]=useState(false);
+  const [edit, setEdit] = useState(false);
+   
   const navigate = useNavigate();
 
-  const API_ENDPOINT="http://localhost:8080/api/meetingCalendar"
+  const API_ENDPOINT = "http://localhost:8080/api/meetingCalendar"
   console.log("DashBoard component rendered");
-  
 
-  useEffect(()=>{
-      console.log(" Dfecth all meetings");
-      fetchAllMeetings();
-  
-  },[]);
+
+  useEffect(() => {
+    console.log(" Dfecth all meetings");
+    fetchAllMeetings();
+
+  }, []);
 
 
   const fetchAllMeetings = async () => {
@@ -60,11 +62,12 @@ const DashBoard = () => {
 
 
 
-  const onEdit=(meetingId)=>{
+  const onEdit = (meetingId) => {
     setEdit(true);
     navigate(`/dashboard/manage-meeting/${meetingId}`);
- }
+  }
 
+ 
 
   return (
     <div className='main-section'  >
@@ -72,8 +75,8 @@ const DashBoard = () => {
 
 
       <Routes>
-        <Route path="schedule-meeting" element={<ScheduleMeeting  meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}/>} />
-        <Route path="manage-meeting/:meetingId" element={<ScheduleMeeting meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}/>} />
+        <Route path="schedule-meeting" element={<ScheduleMeeting meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}  />} />
+        <Route path="manage-meeting/:meetingId" element={<ScheduleMeeting meetings={meetings} updatedMeeting={updatedMeeting} onEdit={onEdit} edit={edit}  />} />
         <Route path="manage-meeting" element={<ManageMeeting />} />
         <Route path="users-permissions" element={<UserPermission />} />
         <Route path="notifications" element={<Notification />} />

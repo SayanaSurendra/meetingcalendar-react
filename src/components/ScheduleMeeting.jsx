@@ -4,11 +4,15 @@ import MeetingList from './MeetingList';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
+import DeleteModal from './DeleteModal';
 
 const ScheduleMeeting = ({ meetings, updatedMeeting, onEdit, edit }) => {
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const { meetingId } = useParams();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+const [selectedMeetingId, setSelectedMeetingId] = useState(null);
+   
 
     const API_ENDPOINT = "http://localhost:8080/api/meetingCalendar";
 
@@ -20,15 +24,17 @@ const ScheduleMeeting = ({ meetings, updatedMeeting, onEdit, edit }) => {
         }
     }, [edit, meetingId]);
 
+    
 
 
-    //post
+
+    //post / Put
     const onSubmit = async (data) => {
         console.log("Form submitted", data);
         const participantsArray = data.participants.split(',').map(participant => ({ email: participant.trim() }));
         let updatedData = { ...data, participants: participantsArray };
         console.log("Form  updated submitted", updatedData);
-        let meetingList=meetings;
+        
 
         try {
             if (meetingId) {
@@ -37,21 +43,21 @@ const ScheduleMeeting = ({ meetings, updatedMeeting, onEdit, edit }) => {
                 console.log("update request", updateRequest)
                 const response = await axios.put(API_ENDPOINT, updateRequest);
                 if (response.status === 204) {
-                   console.log("Form updated successfully");
+                    console.log("Form updated successfully");
 
-                 }else{
+                } else {
                     console.error("error occured while updating form")
-                 }
+                }
 
             } else {
 
                 const response = await axios.post(API_ENDPOINT, updatedData)
                 if (response.status === 201) {
                     console.log("Form submitted");
-                    
-                }else{
+
+                } else {
                     console.error("error occured while submitting form")
-                 }
+                }
 
             }
             updatedMeeting();
@@ -89,14 +95,39 @@ const ScheduleMeeting = ({ meetings, updatedMeeting, onEdit, edit }) => {
             .catch((error) => {
                 console.error("error occurred", error);
             });
+    };
+
+    //Delete
+    const handleDelete = async () => {
+
+        try {
+            await axios.delete(`${API_ENDPOINT}/${selectedMeetingId}`)
+
+            updatedMeeting();
+            setModalIsOpen(false);
+        }
+        catch (error) {
+            console.error("Error occurred while deleting", error);
+        }
     }
+
+    const onDelete= (meetingId)=>{
+        setSelectedMeetingId(meetingId);
+        setModalIsOpen(true);
+     }
 
     return (
         <div className='container-fluid ms-3 me-5 px-4  mb-4 ' >
             <Form register={register} errors={errors} onSubmit={handleSubmit(onSubmit)} edit={edit} meetingId={meetingId} />
             {meetings.length > 0 && (
-                <MeetingList meetings={meetings} onEdit={onEdit} />
+                <MeetingList meetings={meetings} onEdit={onEdit} onDelete={onDelete} />
             )}
+
+            <DeleteModal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+                onConfirm={handleDelete}
+            />
         </div>
     );
 };
