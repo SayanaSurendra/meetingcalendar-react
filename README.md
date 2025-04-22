@@ -58,10 +58,11 @@ Follow the steps to run locally .
    - Use `npm install` to install all dependencies . This will include all the packages required for the app to function properly.
 
 3. **Install additional dependencies**:
-   - Run `npm install bootstrap@5 @popperjs/core axios react-hook-form react-modal react-router//////?????????` to install essential libraries like **Bootstrap**, **Axios**, **React Hook Form**, **React Router** and **React Modal**.
+   - Run `npm install bootstrap@5 @popperjs/core axios react-hook-form react-modal react-router` to install essential libraries like **Bootstrap**, **Axios**, **React Hook Form**, **React Router** and **React Modal**.
 
 4. **Import Bootstrap CSS**:
    - In  `src/main.jsx` file, import Bootstrap’s CSS globally using:
+   
      ```
      import "bootstrap/dist/css/bootstrap.css";
      import "bootstrap/dist/js/bootstrap.js";

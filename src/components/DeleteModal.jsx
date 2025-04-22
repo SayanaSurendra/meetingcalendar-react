@@ -8,7 +8,7 @@ const DeleteModal = ({ isOpen, onClose, onConfirm }) => {
         content: {
             backgroundColor: '#fefefe',
             width: '400px',
-            margin:'15% auto',
+            margin:'17% auto',
             padding: '20px',
             borderRadius: '10px',
      
@@ -22,7 +22,7 @@ const DeleteModal = ({ isOpen, onClose, onConfirm }) => {
     return (
         <Modal isOpen={isOpen} style={styles}>
              
-                       <p>Are you sure you want to delete this meeting</p>
+                       <p>Are you sure you want to delete this meeting?</p>
              
                         <div className="d-flex justify-content-end mt-4 gap-2">
                         <button className="btn btn-secondary" onClick={onClose}>Close</button>
