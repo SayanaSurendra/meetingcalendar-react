@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🗓️ Meeting Calendar -Frontend
 
  A meeting calendar application built using React, allows users to  schedule, manage, update and delete meetings.
@@ -199,3 +200,7 @@ Below are few features planned for future development to enhance the functionali
 
 
 
+=======
+# 🗓️ Meeting Calendar
+A meeting calendar application built using React, allows users to  schedule, manage, update and delete meetings. 
+>>>>>>> ce9aa0abb3ebea5d94a8b0ccd25d0f5fa90dc1f9
