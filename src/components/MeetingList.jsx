@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
-const MeetingList = ({ meetings,onEdit,onDelete }) => {
+const MeetingList = ({ meetings, onDelete }) => {
+    const navigate = useNavigate();
+
+    const onEdit = (meetingId) => {
+
+        navigate(`/dashboard/manage-meeting/${meetingId}`);
+    }
 
     return (
         <div className="container-fluid bg-white ms-3 me-5 px-4 mt-4 mb-4">
@@ -28,8 +35,8 @@ const MeetingList = ({ meetings,onEdit,onDelete }) => {
                                 <td>{meeting.meetingTime}</td>
                                 <td>{meeting.meetingLevel}</td>
                                 <td>
-                                    <button className="me-1 btn btn-warning" onClick={()=>onEdit(meeting.meetingId)} ><i className="bi bi-pencil-square"></i></button>
-                                    <button className="btn btn-danger" onClick={()=>onDelete(meeting.meetingId)}><i className="bi bi-trash"></i></button>
+                                    <button className="me-1 btn btn-warning" onClick={() => onEdit(meeting.meetingId)} ><i className="bi bi-pencil-square"></i></button>
+                                    <button className="btn btn-danger" onClick={() => onDelete(meeting.meetingId)}><i className="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                         ))}

@@ -4,27 +4,34 @@ import MeetingList from './MeetingList';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteModal from './DeleteModal';
+import { useNavigate } from 'react-router';
 
-const ScheduleMeeting = ({ meetings, updatedMeeting, onEdit, edit }) => {
+const ScheduleMeeting = ({ meetings, updatedMeeting }) => {
     const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const { meetingId } = useParams();
     const [modalIsOpen, setModalIsOpen] = useState(false);
-const [selectedMeetingId, setSelectedMeetingId] = useState(null);
-   
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [selectedMeetingId, setSelectedMeetingId] = useState(null);
+    const navigate = useNavigate();
+
 
     const API_ENDPOINT = "http://localhost:8080/api/meetingCalendar";
 
 
 
     useEffect(() => {
-        if (edit && meetingId) {
+        if (meetingId) {
+            setIsEditMode(true);
             fetchMeetingById(meetingId);
+        } else {
+            setIsEditMode(false);
+            reset();
         }
-    }, [edit, meetingId]);
+    }, [meetingId]);
 
-    
+
 
 
 
@@ -34,16 +41,17 @@ const [selectedMeetingId, setSelectedMeetingId] = useState(null);
         const participantsArray = data.participants.split(',').map(participant => ({ email: participant.trim() }));
         let updatedData = { ...data, participants: participantsArray };
         console.log("Form  updated submitted", updatedData);
-        
+
 
         try {
-            if (meetingId) {
+            if (isEditMode) {
                 // console.log("meetingId if update:", meetingId);
                 const updateRequest = { ...updatedData, meetingId: meetingId };
                 console.log("update request", updateRequest)
                 const response = await axios.put(API_ENDPOINT, updateRequest);
                 if (response.status === 204) {
                     console.log("Form updated successfully");
+                    navigate("/dashboard/schedule-meeting");
 
                 } else {
                     console.error("error occured while updating form")
@@ -111,16 +119,16 @@ const [selectedMeetingId, setSelectedMeetingId] = useState(null);
         }
     }
 
-    const onDelete= (meetingId)=>{
+    const onDelete = (meetingId) => {
         setSelectedMeetingId(meetingId);
         setModalIsOpen(true);
-     }
+    }
 
     return (
         <div className='container-fluid ms-3 me-5 px-4  mb-4 ' >
-            <Form register={register} errors={errors} onSubmit={handleSubmit(onSubmit)} edit={edit} meetingId={meetingId} />
+            <Form register={register} errors={errors} onSubmit={handleSubmit(onSubmit)} edit={isEditMode} meetingId={meetingId} />
             {meetings.length > 0 && (
-                <MeetingList meetings={meetings} onEdit={onEdit} onDelete={onDelete} />
+                <MeetingList meetings={meetings} onDelete={onDelete} />
             )}
 
             <DeleteModal
